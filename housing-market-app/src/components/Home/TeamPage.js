@@ -73,10 +73,11 @@ function TeamPage() {
               textAlign: 'justify'
             }}
           >
-            Unlock insights into Melbourne's housing market with our predictive model. By analysing critical factors such as school proximity, room-to-bath ratios, and CBD distance, our platform highlights patterns that shape property prices. Leveraging machine learning techniques like Gradient Boosting and Random Forest, it delivers clear, data-driven insights unique to Melbourne’s housing trends.
+           
+Enhance your understanding of Bangalore's housing market with our predictive model. By analyzing crucial factors such as size, location, and the number of rooms, our platform reveals trends that impact property prices. Employing machine learning techniques like Linear Regression, Lasso Regression, and Decision Trees, it offers clear, data-driven insights tailored to Bangalore's real estate landscape.
             <br />
             <Box component="span" sx={{ display: 'block', marginTop: '15px',textAlign: 'justify'}}>
-              Curious to see how these predictions work? Dive in to explore the model behind the numbers.
+            Interested in how these predictions are generated? Delve into the details to discover the model that drives the insights.
             </Box>
           </Typography>
           <Link to="/about" style={{ textDecoration: 'none' }}>

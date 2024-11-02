@@ -11,7 +11,7 @@ import logo from '../assets/Logo.png';
 function Header() {
   const location = useLocation();
   const navigate = useNavigate();
-
+  document.body.style.backgroundColor = "darkgrey";
   return (
     <AppBar position="static" color="grey" elevation={0} sx={{ padding: '8px 24px', height: '100px' }}>
       <Toolbar
@@ -22,24 +22,25 @@ function Header() {
           justifyContent: 'center',
           alignItems: 'center',
           gap: 2,
+          backgroundColor: 'darkgrey',
         }}
       >
         {/* Logo and Title */}
-        <Box sx={{ display: 'flex', alignItems: 'center', mr: 'auto' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mr: 'auto', borderRadius: '8px', padding: '10px' }}>
           <IconButton edge="start" color="inherit" aria-label="logo" sx={{ p: 0, '&:hover': { backgroundColor: 'transparent' } }}
             onClick={() => navigate('/')}
             disableRipple
-            >
+          >
             <img src={logo} alt="logo" style={{ 
-              width: '150px', 
-              height: '150px',
+              width: '90px', 
+              height: '90px',
               marginLeft: '20px',
-              marginTop: '40px',
-               
-              }} />
+              marginTop: '5px',
+              borderRadius: '50px',
+              backgroundColor: '#808080',
+            }} />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', ml: 1 }}>
-          </Typography>
+          <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', ml: 1 }}></Typography>
         </Box>
 
         {/* Navigation Links */}
@@ -49,6 +50,9 @@ function Header() {
             justifyContent: 'right',
             backgroundColor: '#808080',
             ml: 10,
+            borderRadius: '50px',
+            border: '2px solid #333', // Add border to the navigation box
+            padding: '10px', // Optional padding for better spacing
           }}
         >
           <Button
@@ -58,6 +62,7 @@ function Header() {
               fontFamily: '"Roboto Condensed", sans-serif',
               fontWeight: 'bold',
               fontSize: '1.25rem',
+              borderRadius: '50px',
               backgroundColor: location.pathname === '/' ? '#000000' : 'transparent',
               color: location.pathname === '/' ? 'white' : '#333',
               textTransform: 'none',
@@ -76,6 +81,7 @@ function Header() {
               fontFamily: '"Roboto Condensed", sans-serif',
               fontWeight: 'bold',
               fontSize: '1.25rem',
+              borderRadius: '50px',
               backgroundColor: location.pathname === '/about' ? '#000000' : 'transparent',
               color: location.pathname === '/about' ? 'white' : '#333',
               textTransform: 'none',
@@ -94,6 +100,7 @@ function Header() {
               fontFamily: '"Roboto Condensed", sans-serif',
               fontWeight: 'bold',
               fontSize: '1.25rem',
+              borderRadius: '50px',
               backgroundColor: location.pathname === '/predict' ? '#000000' : 'transparent',
               color: location.pathname === '/predict' ? 'white' : '#333',
               textTransform: 'none',

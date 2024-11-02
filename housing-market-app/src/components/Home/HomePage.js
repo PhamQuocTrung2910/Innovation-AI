@@ -9,7 +9,7 @@ import backgroundImage from '../../assets/background.png';
 
 function HomePage() {
   const navigate = useNavigate();
-
+  document.body.style.backgroundColor = "darkgrey";
   // Function to handle navigation when the button is clicked
   const handleGetStartedClick = () => {
     navigate('/predict');
@@ -26,31 +26,39 @@ function HomePage() {
         gap: '20px',
         overflow: 'hidden',
         width: '100%',
+        borderRadius: '50px',
       }}
     >
       {/* Title Section */}
       <Box
-        sx={{
-          position: 'absolute',
-          top: { xs: '100px', md: '135px' },
-          left: { xs: '20px', md: '60px' },
-          zIndex: 3,
-          transform: 'translateY(-100%)',
-        }}
-      >
-        <Typography
-          variant="h2"
-          sx={{
-            fontFamily: '"Roboto Condensed", sans-serif', 
-            fontWeight: 430,
-            fontSize: '4 rem',
-            color: 'black',
-            marginRight: '100px',
-          }}
-        >
-          Housing For All Those In Need
-        </Typography>
-      </Box>
+  sx={{
+    position: 'absolute',
+    top: { xs: '100px', md: '155px' },
+    left: { xs: '100px', md: '460px' },
+    zIndex: 3,
+    transform: 'translateY(-100%)',
+    backgroundColor: '#808080',
+    padding: '20px', // Add some padding to the box
+    width: '450px', // Set a specific width if necessary
+    overflow: 'hidden', // Prevent overflow
+    borderRadius: '50px',
+    border: '2px solid #333',
+  }}
+>
+  <Typography
+    variant="h2"
+    sx={{
+      fontFamily: '"Roboto Condensed", sans-serif', 
+      fontWeight: 330,
+      fontSize: { xs: '2rem', md: '4rem' }, // Responsive font size
+      color: 'black',
+      marginRight: '0px', // Remove margin if it causes overflow
+      lineHeight: '1.2', // Adjust line height for better text fit
+    }}
+  >
+    Housing For All 
+  </Typography>
+</Box>
 
       {/* Content Wrapper to shift down */}
       <Box
@@ -152,11 +160,11 @@ Get ahead in Melbourne's housing market with insights tailored just for you. Our
           <Box
             component="img"
             src={backgroundImage}
-            alt="Binary"
+            alt="img"
             sx={{
               width: { xs: '80%', md: '100%' },
               height: 'auto',
-              maxHeight: '680px', 
+              maxHeight: '580px', 
               objectFit: 'cover',
               borderRadius: '25px 0 0 25px',
             }}

@@ -9,26 +9,28 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 function About() {
   // Define unique content for each card with corresponding icons
+  
   const cardContent = [
     {
       title: 'Dataset Explanation',
       text: `The dataset supporting this project highlights key factors shaping Melbourne's residential property market. It includes data on rooms, property type, sale price, distance from the CBD, and amenities like bathrooms and car spaces. Regional indicators, such as "Schooling Facilities," reveal the influence of nearby schools on housing demand. Curated from reliable sources, this dataset enables our model to analyze complex relationships, delivering accurate property price predictions tailored to Melbourne’s unique market dynamics.`,
-      icon: <SchoolIcon sx={{ fontSize: 100, color: '#2F4F4F', marginTop: '1px', marginBottom: '5px' }} />,
+      icon: <SchoolIcon sx={{ fontSize: 100, color: '#000000', marginTop: '1px', marginBottom: '5px' }} />,
     },
     {
       title: 'Model Selection',
       text: `Our model selection process captures Melbourne's housing complexities by employing Gradient Boosting, Random Forest, and Polynomial Regression. Each model was chosen for its strength in handling nonlinear interactions, with Gradient Boosting and Random Forest adept at adapting to market fluctuations, and Polynomial Regression refining key feature relationships. Together, they enable our model to deliver precise, reliable predictions tailored specifically to Melbourne's unique housing dynamics.`,
-      icon: <BarChartIcon sx={{ fontSize: 100, color: '#2F4F4F', marginTop: '1px', marginBottom: '5px' }} />,
+      icon: <BarChartIcon sx={{ fontSize: 100, color: '#000000', marginTop: '1px', marginBottom: '5px' }} />,
     },
     {
       title: 'Model Explanation',
       text: `Our model leverages advanced machine learning techniques to forecast housing prices by analyzing critical property factors that influence value. Each algorithm decodes interactions—such as proximity to schools and room configurations—to reflect authentic market trends. Gradient Boosting, in particular, excels at identifying subtle patterns within data, enhancing predictive accuracy. This tailored approach ensures robust, insightful predictions aligned with Melbourne’s unique housing landscape.`,
-      icon: <InsightsIcon sx={{ fontSize: 100, color: '#2F4F4F', marginTop: '1px', marginBottom: '5px' }} />,
+      icon: <InsightsIcon sx={{ fontSize: 100, color: '#000000', marginTop: '1px', marginBottom: '5px' }} />,
     },
   ];
-
+  
   return (
-    <Box sx={{ padding: '40px 30px', backgroundColor: '#ffffff' }}>
+    
+    <Box sx={{ padding: '40px 30px', backgroundColor: 'darkgrey' }}>
       
       {/* Title Section */}
       <Typography
@@ -40,7 +42,7 @@ function About() {
           fontSize: '3.5rem',
           marginTop: '30px', 
           marginBottom: '70px', 
-          color: 'black' 
+          color: 'black', 
         }}
       >
         About the Model
@@ -105,7 +107,7 @@ function About() {
             {index < cardContent.length - 1 && (
               <ArrowForwardIcon sx={{ 
                 fontSize: 50,
-                color: '#2F4F4F',
+                color: '#000000',
               }} />
             )}
           </React.Fragment>

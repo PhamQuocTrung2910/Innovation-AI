@@ -6,15 +6,17 @@ import Typography from '@mui/material/Typography';
 import logoinv from '../assets/Logo.png';
 
 function Footer() {
+  document.body.style.backgroundColor = "darkgrey";
   return (
     <Box
   sx={{
     backgroundColor: '#808080', 
     color: 'black',
-    padding: '0px 60px 30px 60px',  // Adjusted padding for symmetry
+    padding: '20px 60px 30px 60px',  // Adjusted padding for symmetry
     display: 'flex',
     justifyContent: 'space-between', // Logo on left, info on right
     alignItems: 'center',            // Center aligns items vertically
+
   }}
 >
   {/* Logo Section */}
