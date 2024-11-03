@@ -5,12 +5,7 @@ import Footer from './components/footer';
 import HomePage from './components/Home/HomePage';
 import TeamPage from './components/Home/TeamPage';
 import About from './components/About/AboutPage';
-
-const Predict = () => (
-  <div style={{ padding: '60px', textAlign: 'center' }}>
-    <h2>Predict Page</h2>
-  </div>
-);
+import Predict from './components/Predict/Predict';
 
 function ScrollToTopOnMount() {
   const { pathname } = useLocation();
