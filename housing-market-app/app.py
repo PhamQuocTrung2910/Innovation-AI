@@ -4,16 +4,14 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 import numpy as np
 import pandas as pd
-#import AI model too
+import time
+
 
 # Load your cleaned dataset
 data = pd.read_csv('src/components/Predict/cleaned_real_estate_data.csv')
 
 # Initialize FastAPI app
 app = FastAPI()
-
-#initalise AI model here too 
-#model = SimpleModel()
 
 # Configure CORS
 app.add_middleware(
