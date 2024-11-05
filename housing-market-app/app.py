@@ -19,6 +19,11 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
+# Define the root endpoint
+@app.get("/")
+async def read_root():
+    return {"message": "Welcome to the Prediction API!"}
+
 # Define the request body
 class PredictionRequest(BaseModel):
     location: str
@@ -28,6 +33,10 @@ class PredictionRequest(BaseModel):
 
 @app.post("/predict")
 async def predict(request: PredictionRequest):
+    # Check for valid location
+    if request.location not in data['location'].values:
+        return {'error': 'Location not found'}, 404
+
     location_data = data[data['location'] == request.location]
     
     if not location_data.empty:
@@ -35,4 +44,4 @@ async def predict(request: PredictionRequest):
     else:
         predicted_price = np.random.randint(100, 500)  # Fallback if no data is available for the location
     
-    return {'prediction': predicted_price}
+    return {'prediction': round(predicted_price, 2)}  # Round to 2 decimal places

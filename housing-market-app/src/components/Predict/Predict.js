@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Box, TextField, Button, Typography, Grid, Paper } from '@mui/material';
-import * as d3 from 'd3'; // Import D3
-import axios from 'axios'; // Import Axios
-import cleanedData from './cleaned_real_estate_data.csv'; // Make sure to adjust this path accordingly
+import * as d3 from 'd3';
+import axios from 'axios';
+import cleanedData from './cleaned_real_estate_data.csv';
 
 function Predict() {
     const [formData, setFormData] = useState({
@@ -16,19 +16,21 @@ function Predict() {
     const [error, setError] = useState(null);
     const [csvData, setCsvData] = useState([]);
 
-    const validAreas = [
+    // Memoizing validAreas to prevent it from being recreated on every render
+    const validAreas = useMemo(() => [
         'Electronic City',
         'Whitefield',
         'Indiranagar',
         'Koramangala',
-    ];
+    ], []);
 
-    const drawD3Chart = () => {
+    // Memoize drawD3Chart with useCallback
+    const drawD3Chart = useCallback(() => {
         // Clear the existing chart
         d3.select("#d3-bar-chart").selectAll("*").remove();
 
         // Set dimensions and margins for the graph
-        const margin = {top: 20, right: 30, bottom: 40, left: 40},
+        const margin = { top: 20, right: 30, bottom: 40, left: 40 },
               width = 460 - margin.left - margin.right,
               height = 400 - margin.top - margin.bottom;
 
@@ -75,7 +77,7 @@ function Predict() {
 
         svg.append("g")
             .call(d3.axisLeft(y));
-    };
+    }, [predictions, csvData, validAreas]); // Dependencies of drawD3Chart
 
     const handleChange = (e) => {
         setFormData({
@@ -114,7 +116,7 @@ function Predict() {
         if (predictions && csvData.length > 0) {
             drawD3Chart();
         }
-    }, [predictions, csvData]);
+    }, [predictions, csvData, drawD3Chart]);
 
     return (
         <Box sx={{ padding: '50px', maxWidth: '1500px', margin: '0 auto' }}>
