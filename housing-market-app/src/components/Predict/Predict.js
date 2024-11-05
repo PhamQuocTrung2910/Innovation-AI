@@ -20,7 +20,7 @@ function Predict() {
     const validAreas = useMemo(() => [
         'Electronic City',
         'Whitefield',
-        'Indiranagar',
+        'Indira Nagar',
         'Koramangala',
     ], []);
 
@@ -138,16 +138,17 @@ function Predict() {
                                 native: true,
                             }}
                         >
-                            <option value=""> </option>
+                            <option value=""></option>
                             {validAreas.map((area, index) => (
                                 <option key={index} value={area}>{area}</option>
                             ))}
                         </TextField>
 
-                        <TextField label="Size (e.g., 3 BHK)"
+                        <TextField label="Bedroom-Hall-Kitchen (BHK)"
                             name="size"
                             value={formData.size}
                             onChange={handleChange}
+                            type="number"
                             required
                         />
 

@@ -67,8 +67,8 @@ function HomePage() {
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: 'stretch',
           width: '100%',
-          gap: '20px',
-          paddingTop: '130px',
+          gap: '50px',
+          paddingTop: '180px',
         }}
       >
         {/* Grey Background Box */}
