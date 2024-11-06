@@ -60,7 +60,7 @@ function TeamPage() {
 
             }}
           >
-            Predict Housing Market Trends
+            Predict Housing Market Trends with Us at Innovation AI
           </Typography>
           <Typography
             variant="body1"
@@ -96,7 +96,7 @@ Enhance your understanding of Bangalore's housing market with our predictive mod
                 },
               }}
             >
-              Learn More
+              Learn More Here
             </Button>
           </Link>
         </Box>
