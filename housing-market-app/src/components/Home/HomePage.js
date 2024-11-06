@@ -34,7 +34,7 @@ function HomePage() {
   sx={{
     position: 'absolute',
     top: { xs: '100px', md: '155px' },
-    left: { xs: '100px', md: '460px' },
+    left: { xs: '100px', md: '600px' },
     zIndex: 3,
     transform: 'translateY(-100%)',
     backgroundColor: '#808080',
@@ -52,7 +52,7 @@ function HomePage() {
       fontWeight: 330,
       fontSize: { xs: '2rem', md: '4rem' }, // Responsive font size
       color: 'black',
-      marginRight: '0px', // Remove margin if it causes overflow
+      marginLeft: '10px', // Remove margin if it causes overflow
       lineHeight: '1.2', // Adjust line height for better text fit
     }}
   >
@@ -129,7 +129,7 @@ Get ahead in Melbourne's housing market with insights tailored just for you. Our
               color="primary"
               onClick={handleGetStartedClick}
               sx={{
-                marginTop: '70px',
+                marginTop: '80px',
                 marginLeft: '45px',
                 backgroundColor: 'white',
                 color: 'black',
