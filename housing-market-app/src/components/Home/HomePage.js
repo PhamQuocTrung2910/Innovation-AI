@@ -34,7 +34,7 @@ function HomePage() {
   sx={{
     position: 'absolute',
     top: { xs: '100px', md: '155px' },
-    left: { xs: '100px', md: '600px' },
+    left: { xs: '100px', md: '400px' },
     zIndex: 3,
     transform: 'translateY(-100%)',
     backgroundColor: '#808080',
