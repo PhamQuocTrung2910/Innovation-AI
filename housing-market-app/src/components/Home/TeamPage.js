@@ -74,7 +74,7 @@ function TeamPage() {
             }}
           >
            
-Enhance your understanding of Bangalore's housing market with our predictive model. By analyzing crucial factors such as size, location, and the number of rooms, our platform reveals trends that impact property prices. Employing machine learning techniques like Linear Regression, Lasso Regression, and Decision Trees, it offers clear, data-driven insights tailored to Bangalore's real estate landscape.
+Enhance your understanding of Bengaluru's  housing market with our predictive model. By analyzing crucial factors such as size, location, and the number of rooms, our platform reveals trends that impact property prices. Employing machine learning techniques like Linear Regression, Lasso Regression, and Decision Trees, it offers clear, data-driven insights tailored to Bangalore's real estate landscape.
             <br />
             <Box component="span" sx={{ display: 'block', marginTop: '15px',textAlign: 'justify'}}>
             Interested in how these predictions are generated? Delve into the details to discover the model that drives the insights.

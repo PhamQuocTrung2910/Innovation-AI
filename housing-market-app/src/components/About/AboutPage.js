@@ -13,17 +13,17 @@ function About() {
   const cardContent = [
     {
       title: 'Dataset Explanation',
-      text: `The dataset supporting this project highlights key factors shaping Melbourne's residential property market. It includes data on rooms, property type, sale price, distance from the CBD, and amenities like bathrooms and car spaces. Regional indicators, such as "Schooling Facilities," reveal the influence of nearby schools on housing demand. Curated from reliable sources, this dataset enables our model to analyze complex relationships, delivering accurate property price predictions tailored to Melbourne’s unique market dynamics.`,
+      text: `The dataset for this project focuses on key elements that shape the residential property market in Bengaluru, including housing location, property size, bedroom count, and bathroom count. Compiled from credible sources, it allows our model to examine intricate relationships within the data, producing accurate predictions for property prices specifically suited to Bengaluru's unique market conditions.`,
       icon: <SchoolIcon sx={{ fontSize: 100, color: '#000000', marginTop: '1px', marginBottom: '5px' }} />,
     },
     {
       title: 'Model Selection',
-      text: `Our model selection process captures Melbourne's housing complexities by employing Gradient Boosting, Random Forest, and Polynomial Regression. Each model was chosen for its strength in handling nonlinear interactions, with Gradient Boosting and Random Forest adept at adapting to market fluctuations, and Polynomial Regression refining key feature relationships. Together, they enable our model to deliver precise, reliable predictions tailored specifically to Melbourne's unique housing dynamics.`,
+      text: `To address the complexities of Bengaluru’s housing market, our model selection process includes Linear Regression, Lasso Regression, and Decision Trees. Each was selected for its capability in managing nonlinear interactions: Linear and Lasso Regression excel at adapting to market fluctuations, while Decision Trees provide a nuanced understanding of key feature relationships. This combination enables our model to generate precise and dependable predictions tailored to Bengaluru’s unique housing dynamics.`,
       icon: <BarChartIcon sx={{ fontSize: 100, color: '#000000', marginTop: '1px', marginBottom: '5px' }} />,
     },
     {
       title: 'Model Explanation',
-      text: `Our model leverages advanced machine learning techniques to forecast housing prices by analyzing critical property factors that influence value. Each algorithm decodes interactions—such as proximity to schools and room configurations—to reflect authentic market trends. Gradient Boosting, in particular, excels at identifying subtle patterns within data, enhancing predictive accuracy. This tailored approach ensures robust, insightful predictions aligned with Melbourne’s unique housing landscape.`,
+      text: `Our model utilizes sophisticated machine learning methods to predict housing prices by examining essential property factors that affect value. Each algorithm interprets interactions, like property characteristics and room layouts in relation to price to mirror actual market trends. Linear Regression, specifically, is adept at uncovering subtle data patterns, boosting the accuracy of predictions. This customized approach ensures reliable, meaningful forecasts that align with the distinct dynamics of Bengaluru’s housing market.`,
       icon: <InsightsIcon sx={{ fontSize: 100, color: '#000000', marginTop: '1px', marginBottom: '5px' }} />,
     },
   ];

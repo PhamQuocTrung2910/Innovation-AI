@@ -122,7 +122,7 @@ function HomePage() {
               }}
             >
               
-Get ahead in Melbourne's housing market with insights tailored just for you. Our platform leverages machine learning to provide personalized price forecasts for residential area's, helping you buy, sell, or invest with greater clarity and confidence.
+Get ahead in Bengaluru's housing market with insights tailored just for you. Our platform leverages machine learning to provide personalized price forecasts for residential area's, helping you buy, sell, or invest with greater clarity and confidence.
             </Typography>
             <Button
               variant="contained"
