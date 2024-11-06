@@ -241,7 +241,7 @@ function Predict() {
                     <Grid item xs={12} md={5}>
                         <Paper elevation={3} sx={{ padding: '20px', textAlign: 'center' }}>
                             <Typography variant="h6">
-                                Predicted Price: ${predictions.toFixed(2)}
+                                Predicted Price: ${predictions.toFixed(2)}0 Indian Rupees/INR
                             </Typography>
                         </Paper>
                     </Grid>
