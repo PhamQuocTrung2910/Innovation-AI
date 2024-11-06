@@ -122,7 +122,7 @@ function Predict() {
     }, [predictions, csvData, drawD3Chart]);
 
     return (
-        <Box sx={{ padding: '50px', maxWidth: '1500px', margin: '0 auto' }}>
+        <Box sx={{ padding: '50px', maxWidth: '1500px', margin: '0 auto', marginTop: '40px' }}>
             <Typography variant="h4" gutterBottom align="center">
                 Predict With Us
             </Typography>
