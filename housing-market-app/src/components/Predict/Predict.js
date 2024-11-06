@@ -15,24 +15,26 @@ function Predict() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [csvData, setCsvData] = useState([]);
+    const [chartData, setChartData] = useState([]);
+    const [predictionData, setPredictionData] = useState(null);
 
-    // Memoizing validAreas to prevent it from being recreated on every render
     const validAreas = useMemo(() => [
         'Electronic City',
         'Whitefield',
         'Indira Nagar',
         'Koramangala',
+        'BTM Layout',
+        'Jayanagar',
+        'Malleshwaram',
+        'Brigade Road',
     ], []);
 
-    // Memoize drawD3Chart with useCallback
-    const drawD3Chart = useCallback(() => {
-        // Clear the existing chart
+    const drawD3Chart = useCallback((dataToUse) => {
         d3.select("#d3-bar-chart").selectAll("*").remove();
 
-        // Set dimensions and margins for the graph
         const margin = { top: 20, right: 30, bottom: 40, left: 40 },
-              width = 460 - margin.left - margin.right,
-              height = 400 - margin.top - margin.bottom;
+              width = 800 - margin.left - margin.right,
+              height = 500 - margin.top - margin.bottom;
 
         const svg = d3.select("#d3-bar-chart")
             .append("svg")
@@ -41,43 +43,62 @@ function Predict() {
             .append("g")
             .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-        const data = [
-            { area: 'Current Prediction', price: predictions },
-            ...validAreas.map(area => {
-                const entry = csvData.find(item => item.location === area);
-                return { area: area, price: entry ? parseFloat(entry.price) : 0 };
-            })
-        ];
+        // Tooltip for hover
+        const tooltip = d3.select("#d3-bar-chart")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0)
+            .style("position", "absolute")
+            .style("background-color", "lightgrey")
+            .style("padding", "5px")
+            .style("border-radius", "5px");
 
         const x = d3.scaleBand()
-            .domain(data.map(d => d.area))
+            .domain(dataToUse.map(d => d.area))
             .range([0, width])
             .padding(0.1);
 
         const y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.price)])
+            .domain([0, d3.max(dataToUse, d => d.price)])
             .nice()
             .range([height, 0]);
 
-        svg.append("g")
-            .selectAll(".bar")
-            .data(data)
+        // Draw bars with transitions
+        svg.selectAll(".bar")
+            .data(dataToUse)
             .enter()
             .append("rect")
             .attr("class", "bar")
             .attr("x", d => x(d.area))
             .attr("width", x.bandwidth())
+            .attr("y", height) // Start bars at the bottom
+            .attr("height", 0) // Start bars with height 0
+            .attr("fill", d => d.color)
+            .on("mouseover", function (event, d) {
+                tooltip.transition().duration(200).style("opacity", .9);
+                tooltip.html(`
+                    ${d.area}: $${d.price.toFixed(2)}<br>
+                    Size: ${d.bhk} BHK, Total sqft: ${d.sqft}, Bathrooms: ${d.bathrooms}
+                `)
+                .style("left", (event.pageX + 5) + "px")
+                .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function () {
+                tooltip.transition().duration(500).style("opacity", 0);
+            })
+            .transition() // Add transition for height animation
+            .duration(1000)
             .attr("y", d => y(d.price))
-            .attr("height", d => height - y(d.price))
-            .attr("fill", "#3b82f6");
+            .attr("height", d => height - y(d.price));
 
+        // Remove x-axis labels
         svg.append("g")
             .attr("transform", `translate(0, ${height})`)
-            .call(d3.axisBottom(x));
+            .call(d3.axisBottom(x).tickFormat(() => "")); // Hide tick labels
 
         svg.append("g")
             .call(d3.axisLeft(y));
-    }, [predictions, csvData, validAreas]);
+    }, []);
 
     const handleChange = (e) => {
         setFormData({
@@ -89,16 +110,28 @@ function Predict() {
     const handlePredict = async () => {
         setLoading(true);
         setError(null);
-    
+
         try {
             const response = await axios.post('http://localhost:8000/predict', {
                 location: formData.location,
-                size: parseFloat(formData.size),          // Convert to float
-                total_sqft: parseFloat(formData.total_sqft), // Convert to float
-                bathrooms: parseInt(formData.bathrooms, 10), // Convert to integer
+                size: parseFloat(formData.size),
+                total_sqft: parseFloat(formData.total_sqft),
+                bathrooms: parseInt(formData.bathrooms, 10),
             });
-    
+
             setPredictions(response.data.prediction);
+
+            const newPrediction = {
+                area: 'Predicted Price',
+                price: response.data.prediction,
+                color: '#FF5733',
+                sqft: formData.total_sqft,
+                bhk: formData.size,
+                bathrooms: formData.bathrooms
+            };
+
+            setPredictionData(newPrediction);
+
         } catch (err) {
             setError(err.response ? err.response.data.detail : err.message);
         } finally {
@@ -106,20 +139,42 @@ function Predict() {
         }
     };
 
-    // Check if all form fields are filled
     const isFormComplete = formData.location && formData.size && formData.total_sqft && formData.bathrooms;
+
+    const handleSort = (order) => {
+        const combinedData = predictionData ? [...chartData, predictionData] : chartData;
+        const sorted = [...combinedData].sort((a, b) => {
+            return order === 'asc' ? a.price - b.price : b.price - a.price;
+        });
+        drawD3Chart(sorted);
+    };
 
     useEffect(() => {
         d3.csv(cleanedData).then(data => {
+            // Prepare initial chart data
+            const initialChartData = validAreas.map(area => {
+                const entry = data.find(item => item.location === area);
+                return {
+                    area: area,
+                    price: entry ? parseFloat(entry.price) : 0,
+                    color: '#3b82f6',
+                    sqft: entry ? entry.total_sqft : "",
+                    bhk: entry ? entry.bhk : "",
+                    bathrooms: entry ? entry.bathrooms : ""
+                };
+            });
             setCsvData(data);
+            setChartData(initialChartData);
+            drawD3Chart(initialChartData);
         });
-    }, []);
+    }, [validAreas, drawD3Chart]);
 
     useEffect(() => {
-        if (predictions && csvData.length > 0) {
-            drawD3Chart();
+        if (predictions !== null) {
+            const combinedData = predictionData ? [...chartData, predictionData] : chartData;
+            drawD3Chart(combinedData);
         }
-    }, [predictions, csvData, drawD3Chart]);
+    }, [predictions, chartData, predictionData, drawD3Chart]);
 
     return (
         <Box sx={{ padding: '50px', maxWidth: '1500px', margin: '0 auto', marginTop: '40px' }}>
@@ -174,7 +229,7 @@ function Predict() {
                         <Button
                             variant="contained"
                             onClick={handlePredict}
-                            disabled={!isFormComplete || loading}  // Disabled if form is incomplete or loading
+                            disabled={!isFormComplete || loading}
                         >
                             {loading ? 'Loading...' : 'Get Predictions'}
                         </Button>
@@ -193,12 +248,20 @@ function Predict() {
                 )}
             </Grid>
 
-            {predictions && (
+            {csvData.length > 0 && (
                 <Box sx={{ marginTop: '50px', textAlign: 'center' }}>
                     <Typography variant="h6">
                         Prediction Visualization
                     </Typography>
-                    <div id="d3-bar-chart" style={{ height: '400px' }} />
+                    <div id="d3-bar-chart" style={{ height: '500px' }} />
+                    <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, marginTop: '20px' }}>
+                        <Button variant="outlined" onClick={() => handleSort('asc')}>
+                            Sort Ascending
+                        </Button>
+                        <Button variant="outlined" onClick={() => handleSort('desc')}>
+                            Sort Descending
+                        </Button>
+                    </Box>
                 </Box>
             )}
         </Box>
