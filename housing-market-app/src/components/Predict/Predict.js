@@ -77,7 +77,7 @@ function Predict() {
 
         svg.append("g")
             .call(d3.axisLeft(y));
-    }, [predictions, csvData, validAreas]); // Dependencies of drawD3Chart
+    }, [predictions, csvData, validAreas]);
 
     const handleChange = (e) => {
         setFormData({
@@ -89,15 +89,15 @@ function Predict() {
     const handlePredict = async () => {
         setLoading(true);
         setError(null);
-
+    
         try {
             const response = await axios.post('http://localhost:8000/predict', {
                 location: formData.location,
-                size: parseFloat(formData.size),
-                total_sqft: parseFloat(formData.total_sqft),
-                bathrooms: parseInt(formData.bathrooms),
+                size: parseFloat(formData.size),          // Convert to float
+                total_sqft: parseFloat(formData.total_sqft), // Convert to float
+                bathrooms: parseInt(formData.bathrooms, 10), // Convert to integer
             });
-
+    
             setPredictions(response.data.prediction);
         } catch (err) {
             setError(err.response ? err.response.data.detail : err.message);
@@ -105,6 +105,9 @@ function Predict() {
             setLoading(false);
         }
     };
+
+    // Check if all form fields are filled
+    const isFormComplete = formData.location && formData.size && formData.total_sqft && formData.bathrooms;
 
     useEffect(() => {
         d3.csv(cleanedData).then(data => {
@@ -171,7 +174,7 @@ function Predict() {
                         <Button
                             variant="contained"
                             onClick={handlePredict}
-                            disabled={loading}
+                            disabled={!isFormComplete || loading}  // Disabled if form is incomplete or loading
                         >
                             {loading ? 'Loading...' : 'Get Predictions'}
                         </Button>
